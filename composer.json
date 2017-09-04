@@ -1,0 +1,21 @@
+{
+    "name": "nogo/mailgroup",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danilo Kühn",
+            "email": "dk@nogo-software.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php-imap/php-imap": "^2.1",
+        "swiftmailer/swiftmailer": "^6.0@dev",
+        "analog/analog": "dev-master",
+        "catfan/medoo": "dev-master"
+    },
+    "require-dev": {
+        "kint-php/kint": "dev-master"
+    }
+}
