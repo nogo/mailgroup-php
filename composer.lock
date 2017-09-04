@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fc000f695917bb2be8ffc5e598b1b58",
+    "content-hash": "fcc2edaa9b2694470232d9c2486ec9f5",
     "packages": [
         {
             "name": "analog/analog",
@@ -54,59 +54,6 @@
                 "syslog"
             ],
             "time": "2016-11-17T14:39:33+00:00"
-        },
-        {
-            "name": "aura/sql",
-            "version": "3.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Sql.git",
-                "reference": "596fc78aa20c434d5ac95a6d234ffad17f6df4a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/596fc78aa20c434d5ac95a6d234ffad17f6df4a0",
-                "reference": "596fc78aa20c434d5ac95a6d234ffad17f6df4a0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0",
-                "psr/log": "^1.0"
-            },
-            "require-dev": {
-                "pds/skeleton": "~1.0",
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Sql\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Sql Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Sql/contributors"
-                }
-            ],
-            "description": "A PDO extension that provides lazy connections, array quoting, query profiling, value binding, and convenience methods for common fetch styles. Because it extends PDO, existing code that uses PDO can use this without any changes to the existing code.",
-            "homepage": "https://github.com/auraphp/Aura.Sql",
-            "keywords": [
-                "mysql",
-                "pdo",
-                "pgsql",
-                "postgres",
-                "postgresql",
-                "sql server",
-                "sqlite",
-                "sqlserver",
-                "sqlsrv"
-            ],
-            "time": "2017-06-28T15:21:43+00:00"
         },
         {
             "name": "catfan/medoo",
@@ -491,7 +438,6 @@
         "swiftmailer/swiftmailer": 20,
         "analog/analog": 20,
         "catfan/medoo": 20,
-        "aura/sql": 20,
         "kint-php/kint": 20
     },
     "prefer-stable": false,
