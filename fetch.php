@@ -16,16 +16,16 @@ foreach ($mailsIds as $message_uid) {
   $recieved = $mailbox->getMail($message_uid, false);
 
   if (!isset(CONFIGURATION['LIST'][$recieved->fromAddress])) {
-    Analog::info(sprintf('Mail[%] not in mailing list', $recieved->fromAddress ));
     $mailbox->markMailAsRead($message_uid);
     $mailbox->moveMail($message_uid, CONFIGURATION['IMAP']['ERRORS']);
+    Analog::info(sprintf('Mail[%] not in mailing list', $recieved->fromAddress ));
     continue;
   }
 
   if ($queue->has('messages', [ 'message_uid' => $recieved->messageId ])) {
-    Analog::info(sprintf('Mail[%] already exists', $recieved->messageId ));
     $mailbox->markMailAsRead($message_uid);
     $mailbox->moveMail($message_uid, CONFIGURATION['IMAP']['RECEIVED']);
+    Analog::info(sprintf('Mail[%] already exists', $recieved->messageId ));
     continue;
   }
 

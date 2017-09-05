@@ -31,8 +31,8 @@ foreach ($queue_items as $item) {
   try {
     $failed_recipients = [];
     if ($mailer->send($message, $failed_recipients) > 0) {
-      Analog::info(sprintf('Sent message[%d] to %s', $item['message_id'], $item['send_to']));
       $queue->update('queue', [ 'sent' => true ], [ 'id[=]' => $item['id'] ]);
+      Analog::info(sprintf('Sent message[%d] to %s', $item['message_id'], $item['send_to']));
     } else {
       Analog::error(sprintf('Problem to sent message[%d] to %s', $item['message_id'], join('; ', $failed_recipients)));
     }
