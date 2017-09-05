@@ -1,21 +1,21 @@
 ; Mailing list
 
-[configuration]
+[SETUP]
 NAME = Mailing list name
 MAIL = mailling@domain.tld
 
-[imap]
+[IMAP]
 HOST = imap.domain.tld
 USER = email@domain.tld
 PASSWORD = secure
 RECEIVED = INBOX.received    ; folder for already queued mails
 ERRORS = INBOX.errors        ; folder for error mails
 
-[smtp]
+[SMTP]
 HOST = smtp.domain.tld
 USER = email@domain.tld
 PASSWORD = secure
 BOUNCE = bounce@domain.tld
 
-[list]
+[LIST]
 email@domain.tld = Name of Person
