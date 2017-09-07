@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d44b09ec95413e65b4a1dd64bcccd0bc",
+    "content-hash": "b803e4740166ae6452516159276b8b8b",
     "packages": [
         {
             "name": "analog/analog",
@@ -373,20 +373,20 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "dev-master",
+            "version": "3.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "536404846ea28da89d9e025f31bbce75556d6588"
+                "reference": "c076a2d6f809130a84f99616b425b9665b3ce0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/536404846ea28da89d9e025f31bbce75556d6588",
-                "reference": "536404846ea28da89d9e025f31bbce75556d6588",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c076a2d6f809130a84f99616b425b9665b3ce0a5",
+                "reference": "c076a2d6f809130a84f99616b425b9665b3ce0a5",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
             },
             "conflict": {
                 "symfony/console": "<3.4"
@@ -400,7 +400,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -427,7 +427,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-06T19:16:37+00:00"
+            "time": "2017-09-04T13:18:59+00:00"
         }
     ],
     "packages-dev": [
@@ -437,12 +437,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kint-php/kint.git",
-                "reference": "f227d3da58837bbed751671c03740b76b42acacd"
+                "reference": "b091715eadaf6e1a7ef927f3e81d1004611d2aea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kint-php/kint/zipball/f227d3da58837bbed751671c03740b76b42acacd",
-                "reference": "f227d3da58837bbed751671c03740b76b42acacd",
+                "url": "https://api.github.com/repos/kint-php/kint/zipball/b091715eadaf6e1a7ef927f3e81d1004611d2aea",
+                "reference": "b091715eadaf6e1a7ef927f3e81d1004611d2aea",
                 "shasum": ""
             },
             "require": {
@@ -487,7 +487,7 @@
                 "kint",
                 "php"
             ],
-            "time": "2017-08-13T09:53:18+00:00"
+            "time": "2017-09-06T17:46:03+00:00"
         }
     ],
     "aliases": [],
@@ -496,7 +496,6 @@
         "swiftmailer/swiftmailer": 20,
         "analog/analog": 20,
         "catfan/medoo": 20,
-        "symfony/yaml": 20,
         "kint-php/kint": 20
     },
     "prefer-stable": false,

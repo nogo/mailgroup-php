@@ -19,7 +19,7 @@ use Symfony\Component\Yaml\Yaml;
 Analog::handler(AnalogFileHandler::init(LOG_FILE));
 
 if (!file_exists(CONFIGURATION_FILE)) {
-  die('Copy the `cp configuration.ini.dist configuration.ini` in data folder.');
+  die('Copy the `cp configuration.yml.dist configuration.yml` in data folder.');
 }
 define('CONFIGURATION', Yaml::parse(file_get_contents(CONFIGURATION_FILE)));
 

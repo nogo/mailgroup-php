@@ -14,7 +14,7 @@
         "swiftmailer/swiftmailer": "^6.0@dev",
         "analog/analog": "dev-master",
         "catfan/medoo": "dev-master",
-        "symfony/yaml": "^4.0@dev"
+        "symfony/yaml": "^3.3"
     },
     "require-dev": {
         "kint-php/kint": "dev-master"
