@@ -21,9 +21,9 @@ Mailgroup is a multi-account mailing list written in PHP using cron.
 Copy configuration file in data and edit it.
 ```
 cp data\configuration.yml.dist data\configuration.yml
-```
 
-```
+# Configuration
+
 keyname_for_mailing_please_modify:              --> important to identify the account in the queue
   NAME: Mailing list name
   MAIL: mailing@domain.tld
@@ -42,6 +42,11 @@ keyname_for_mailing_please_modify:              --> important to identify the ac
   LIST:
     - email@domain.tld
     - ...
+```
+
+Create queue database.
+```
+php app/update.php
 ```
 
 Add two entries to the crontab or call the `fetch.php` and `send.php` from another php script.
