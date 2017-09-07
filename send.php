@@ -11,35 +11,48 @@ if (count($queue_items) <= 0) {
   die();
 }
 
+$list = [];
+
+// create mailer by configuration
 foreach (CONFIGURATION as $listName => $configuration) {
   $transport = new Swift_SmtpTransport($configuration['SMTP']['HOST'], 465, 'ssl');
   $transport->setUsername($configuration['SMTP']['USER'])->setPassword($configuration['SMTP']['PASSWORD']);
+
   $mailer = new Swift_Mailer($transport);
   $mailer->registerPlugin(new Swift_Plugins_AntiFloodPlugin(100, 30));
 
-  foreach ($queue_items as $item) {
-    $queue_message = $queue->get('messages', '*', ['id[=]' => $item['message_id'], 'list_name[=]' => $listName]);
-    if (empty($queue_message)) continue;
+  $list[$listName] = [
+      'mailer' => $mailer,
+      'configuration' => $configuration
+  ];
+}
 
-    $message = new Swift_Message();
-    $message->setSubject($queue_message['subject']);
-    $message->setFrom([$configuration['MAIL'] => $configuration['NAME']])
-      ->setBody($queue_message['plain'])
-      ->addPart($queue_message['html'], 'text/html')
-      ->setDate(new DateTime('@' . $queue_message['message_date']))
-      ->setTo($item['send_to'])
-      ->setReturnPath($configuration['SMTP']['BOUNCE']);
+// process messages
+foreach ($queue_items as $item) {
+  $queue_message = $queue->get('messages', '*', ['id[=]' => $item['message_id']]);
+  if (empty($queue_message)) continue;
 
-    try {
-      $failed_recipients = [];
-      if ($mailer->send($message, $failed_recipients) > 0) {
-        $queue->update('queue', [ 'sent' => true ], [ 'id[=]' => $item['id'] ]);
-        Analog::info(sprintf('Sent message[%d] to %s', $item['message_id'], $item['send_to']));
-      } else {
-        Analog::error(sprintf('Problem to sent message[%d] to %s', $item['message_id'], join('; ', $failed_recipients)));
-      }
-    } catch (\Exception $e) {
-      Analog::error(sprintf('Problem to sent message[%d] to %s', $item['message_id'], $item['send_to']));
+  $current = $list[$queue_message['list_name']];
+  $configuration = $current['configuration'];
+  $mailer = $current['mailter'];
+
+  $message = new Swift_Message();
+  $message->setSubject($queue_message['subject']);
+  $message->setFrom([$configuration['MAIL'] => $configuration['NAME']])
+    ->setBody($queue_message['plain'])
+    ->addPart($queue_message['html'], 'text/html')
+    ->setDate(new DateTime('@' . $queue_message['message_date']))
+    ->setTo($item['send_to'])
+    ->setReturnPath($configuration['SMTP']['BOUNCE']);
+
+  try {
+    $failed_recipients = [];
+    if ($mailer->send($message, $failed_recipients) > 0) {
+      $queue->update('queue', [ 'sent' => true ], [ 'id[=]' => $item['id'] ]);
+    } else {
+      Analog::error(sprintf('Problem to sent message[%d] to %s', $item['message_id'], join('; ', $failed_recipients)));
     }
+  } catch (\Exception $e) {
+    Analog::error(sprintf('Problem to sent message[%d] to %s', $item['message_id'], $item['send_to']));
   }
 }
