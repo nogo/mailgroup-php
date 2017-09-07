@@ -19,6 +19,7 @@ foreach (CONFIGURATION as $listName => $configuration) {
 
   foreach ($queue_items as $item) {
     $queue_message = $queue->get('messages', '*', ['id[=]' => $item['message_id'], 'list_name[=]' => $listName]);
+    if (empty($queue_message)) continue;
 
     $message = new Swift_Message();
     $message->setSubject($queue_message['subject']);
