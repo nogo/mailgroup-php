@@ -40,7 +40,7 @@ keyname_for_mailing_please_modify:              --> important to identify the ac
     PASSWORD: secure
     BOUNCE: bounce@domain.tld
   LIST:
-    - email@domain.tld
+    email@domain.tld: Name
     - ...
 ```
 
