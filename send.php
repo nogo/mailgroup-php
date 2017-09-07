@@ -22,7 +22,7 @@ foreach (CONFIGURATION as $listName => $configuration) {
 
     $message = new Swift_Message();
     $message->setSubject($queue_message['subject']);
-    $message->setFrom([$configuration['SETUP']['MAIL'] => $configuration['SETUP']['NAME']])
+    $message->setFrom([$configuration['MAIL'] => $configuration['NAME']])
       ->setBody($queue_message['plain'])
       ->addPart($queue_message['html'], 'text/html')
       ->setDate(new DateTime('@' . $queue_message['message_date']))
