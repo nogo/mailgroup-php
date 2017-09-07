@@ -8,8 +8,7 @@ if (!file_exists(QUEUE_FILE) || filesize(QUEUE_FILE) <= 0) {
   die('Run `php app/update.php` to initialize database.');
 }
 
-foreach (CONFIGURATION as $configuration) {
-
+foreach (CONFIGURATION as $listName => $configuration) {
   $mailbox = new PhpImap\Mailbox(sprintf('{%s:993/imap/ssl}INBOX', $configuration['IMAP']['HOST']), $configuration['IMAP']['USER'], $configuration['IMAP']['PASSWORD'], MAIL_ATTACHMENTS);
   $mailbox->setExpungeOnDisconnect(true);
   $mailsIds = $mailbox->searchMailbox($configuration['IMAP']['SEARCH']);
@@ -34,6 +33,7 @@ foreach (CONFIGURATION as $configuration) {
     $messageDate = new DateTime($recieved->date);
 
     $stmt = $queue->insert('messages', [
+      'list_name' => $listName,
       'message_uid' => $recieved->messageId,
       'message_date' => $messageDate->getTimestamp(),
       'message_from' => $recieved->fromAddress,
@@ -45,7 +45,7 @@ foreach (CONFIGURATION as $configuration) {
     if ($stmt->rowCount() > 0) {
       $message_id = $queue->id();
 
-      foreach ($configuration['LIST'] as $sender => $name) {
+      foreach ($configuration['LIST'] as $sender) {
         if ($recieved->fromAddress === $sender) continue;
         $queue->insert('queue', [
           'message_id' => $message_id,

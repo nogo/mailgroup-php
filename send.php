@@ -11,14 +11,14 @@ if (count($queue_items) <= 0) {
   die();
 }
 
-foreach (CONFIGURATION as $configuration) {
+foreach (CONFIGURATION as $listName => $configuration) {
   $transport = new Swift_SmtpTransport($configuration['SMTP']['HOST'], 465, 'ssl');
   $transport->setUsername($configuration['SMTP']['USER'])->setPassword($configuration['SMTP']['PASSWORD']);
   $mailer = new Swift_Mailer($transport);
   $mailer->registerPlugin(new Swift_Plugins_AntiFloodPlugin(100, 30));
 
   foreach ($queue_items as $item) {
-    $queue_message = $queue->get('messages', '*', ['id[=]' => $item['message_id']]);
+    $queue_message = $queue->get('messages', '*', ['id[=]' => $item['message_id'], 'list_name[=]' => $listName]);
 
     $message = new Swift_Message();
     $message->setSubject($queue_message['subject']);

@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY,
+  list_name TEXT NOT NULL,
   message_uid TEXT NOT NULL,
   message_date INTEGER NOT NULL,
   message_from TEXT NOT NULL,

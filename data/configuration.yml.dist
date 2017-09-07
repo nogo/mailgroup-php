@@ -1,4 +1,5 @@
-- NAME: Mailing list name
+keyname_for_mailing_please_modify:
+  NAME: Mailing list name
   MAIL: mailing@domain.tld
   IMAP:
     HOST: imap.domain.tld
