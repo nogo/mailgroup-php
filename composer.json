@@ -13,7 +13,8 @@
         "php-imap/php-imap": "^2.1",
         "swiftmailer/swiftmailer": "^6.0@dev",
         "analog/analog": "dev-master",
-        "catfan/medoo": "dev-master"
+        "catfan/medoo": "dev-master",
+        "symfony/yaml": "^4.0@dev"
     },
     "require-dev": {
         "kint-php/kint": "dev-master"

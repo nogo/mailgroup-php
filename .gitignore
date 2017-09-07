@@ -3,4 +3,4 @@ composer.phar
 /vendor/
 
 data/*
-!data/configuration.ini.dist
+!data/configuration.yml.dist

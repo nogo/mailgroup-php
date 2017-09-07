@@ -1,0 +1,16 @@
+- NAME: Mailing list name
+  MAIL: mailing@domain.tld
+  IMAP:
+    HOST: imap.domain.tld
+    USER: mailing@domain.tld
+    PASSWORD: secure
+    SEARCH: UNSEEN
+    RECEIVED: INBOX.received
+    ERROR: INBOX.errors
+  SMTP:
+    HOST: smtp.domain.tld
+    USER: mailing@domain.tld
+    PASSWORD: secure
+    BOUNCE: bounce@domain.tld
+  LIST:
+    - email@domain.tld

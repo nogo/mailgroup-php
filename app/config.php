@@ -5,7 +5,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 define('ROOT_DIR', realpath(__DIR__ . '/../'));
-define('CONFIGURATION_FILE', ROOT_DIR . '/data/configuration.ini');
+define('CONFIGURATION_FILE', ROOT_DIR . '/data/configuration.yml');
 define('QUEUE_FILE', ROOT_DIR . '/data/queue.sq3');
 define('LOG_FILE', ROOT_DIR . '/data/log/mailgroup.log');
 define('MAIL_ATTACHMENTS', ROOT_DIR . '/data/attachments');
@@ -14,14 +14,14 @@ define('INIT_DB', !file_exists(QUEUE_FILE));
 use Analog\Analog;
 use Analog\Handler\File as AnalogFileHandler;
 use Medoo\Medoo;
+use Symfony\Component\Yaml\Yaml;
 
 Analog::handler(AnalogFileHandler::init(LOG_FILE));
 
 if (!file_exists(CONFIGURATION_FILE)) {
   die('Copy the `cp configuration.ini.dist configuration.ini` in data folder.');
 }
-
-define('CONFIGURATION', parse_ini_file(CONFIGURATION_FILE, TRUE));
+define('CONFIGURATION', Yaml::parse(file_get_contents(CONFIGURATION_FILE)));
 
 $queue = new Medoo([
 	'database_type' => 'sqlite',
