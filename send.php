@@ -34,7 +34,7 @@ foreach ($queue_items as $item) {
 
   $current = $list[$queue_message['list_name']];
   $configuration = $current['configuration'];
-  $mailer = $current['maiter'];
+  $mailer = $current['mailer'];
 
   $message = new Swift_Message();
   $message->setSubject($queue_message['subject']);
