@@ -34,16 +34,28 @@ foreach ($queue_items as $item) {
 
   $current = $list[$queue_message['list_name']];
   $configuration = $current['configuration'];
-  $mailer = $current['mailter'];
+  $mailer = $current['maiter'];
 
   $message = new Swift_Message();
   $message->setSubject($queue_message['subject']);
   $message->setFrom([$configuration['MAIL'] => $configuration['NAME']])
-    ->setBody($queue_message['plain'])
-    ->addPart($queue_message['html'], 'text/html')
     ->setDate(new DateTime('@' . $queue_message['message_date']))
     ->setTo($item['send_to'])
     ->setReturnPath($configuration['SMTP']['BOUNCE']);
+
+
+  $plain = trim($queue_message['plain']);
+  $html = trim($queue_message['html']);
+
+  if (empty($plain) && empty($html)) continue;
+
+  if (empty($plain)){
+    $message->setBody($html, 'text/html');
+  } else if (empty($html)) {
+    $message->setBody($plain);
+  } else {
+    $message->setBody($plain)->addPart($queue_message['html'], 'text/html');
+  }
 
   try {
     $failed_recipients = [];
