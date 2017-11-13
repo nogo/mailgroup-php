@@ -12,11 +12,12 @@ foreach (CONFIGURATION as $listName => $configuration) {
   $mailbox = new PhpImap\Mailbox(sprintf('{%s:993/imap/ssl}INBOX', $configuration['IMAP']['HOST']), $configuration['IMAP']['USER'], $configuration['IMAP']['PASSWORD'], MAIL_ATTACHMENTS);
   $mailbox->setExpungeOnDisconnect(true);
   $mailsIds = $mailbox->searchMailbox($configuration['IMAP']['SEARCH']);
+  $listPublic = isset($configuration['PUBLIC']) ? $configuration['PUBLIC'] : false;
 
   foreach ($mailsIds as $message_uid) {
     $recieved = $mailbox->getMail($message_uid, false);
 
-    if (!isset($configuration['LIST'][$recieved->fromAddress])) {
+    if (!$listPublic && !isset($configuration['LIST'][$recieved->fromAddress])) {
       $mailbox->markMailAsRead($message_uid);
       $mailbox->moveMail($message_uid, $configuration['IMAP']['ERRORS']);
       Analog::info(sprintf('Mail[%] not in mailing list', $recieved->fromAddress ));
