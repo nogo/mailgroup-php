@@ -17,3 +17,7 @@ CREATE TABLE IF NOT EXISTS queue (
   sent INTEGER DEFAULT 0,
   CONSTRAINT uc_message_to UNIQUE (message_id, send_to)
 );
+
+CREATE TABLE IF NOT EXISTS migrations (
+  name TEXT PRIMARY KEY
+);

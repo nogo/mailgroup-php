@@ -12,12 +12,13 @@ foreach (CONFIGURATION as $listName => $configuration) {
   $mailbox = new PhpImap\Mailbox(sprintf('{%s:993/imap/ssl}INBOX', $configuration['IMAP']['HOST']), $configuration['IMAP']['USER'], $configuration['IMAP']['PASSWORD'], MAIL_ATTACHMENTS);
   $mailbox->setExpungeOnDisconnect(true);
   $mailsIds = $mailbox->searchMailbox($configuration['IMAP']['SEARCH']);
-  $listPublic = isset($configuration['PUBLIC']) ? $configuration['PUBLIC'] : false;
+  $public = isset($configuration['PUBLIC']) ? $configuration['PUBLIC'] : false;
 
   foreach ($mailsIds as $message_uid) {
     $recieved = $mailbox->getMail($message_uid, false);
 
-    if (!$listPublic && !isset($configuration['LIST'][$recieved->fromAddress])) {
+    $external = !isset($configuration['LIST'][$recieved->fromAddress]);
+    if (!$public && $external) {
       $mailbox->markMailAsRead($message_uid);
       $mailbox->moveMail($message_uid, $configuration['IMAP']['ERRORS']);
       Analog::info(sprintf('Mail[%] not in mailing list', $recieved->fromAddress ));
@@ -38,6 +39,7 @@ foreach (CONFIGURATION as $listName => $configuration) {
       'message_uid' => $recieved->messageId,
       'message_date' => $messageDate->getTimestamp(),
       'message_from' => $recieved->fromAddress,
+      'external' => $external,
       'subject' => $recieved->subject,
       'plain'=> $recieved->textPlain,
       'html'=> $recieved->textHtml

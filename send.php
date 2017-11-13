@@ -38,11 +38,12 @@ foreach ($queue_items as $item) {
 
   $message = new Swift_Message();
   $message->setSubject($queue_message['subject']);
-  $message->setFrom([$configuration['MAIL'] => $configuration['NAME']])
+  $message
+    ->setId($queue_message['message_uid'])
     ->setDate(new DateTime('@' . $queue_message['message_date']))
+    ->setFrom([$configuration['MAIL'] => $configuration['NAME']])
     ->setTo($item['send_to'])
     ->setReturnPath($configuration['SMTP']['BOUNCE']);
-
 
   $plain = trim($queue_message['plain']);
   $html = trim($queue_message['html']);

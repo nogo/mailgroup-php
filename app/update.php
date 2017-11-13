@@ -10,8 +10,12 @@ if (!file_exists(dirname(LOG_FILE))) {
 
 $files = glob(ROOT_DIR . '/app/sql/*.{sql}', GLOB_BRACE);
 foreach($files as $file) {
+  $migration = basename($file);
+  if ($queue->has('migrations', [ 'name' => $migration ])) continue;
+
   $queries = explode(';', file_get_contents($file));
   foreach ($queries as $query) {
     $queue->exec($query);
   }
+  $queue->insert('migrations', [ 'name' => $migration ]);
 }
