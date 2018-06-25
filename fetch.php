@@ -21,14 +21,14 @@ foreach (CONFIGURATION as $listName => $configuration) {
     if (!$public && $external) {
       $mailbox->markMailAsRead($message_uid);
       $mailbox->moveMail($message_uid, $configuration['IMAP']['ERRORS']);
-      Analog::info(sprintf('Mail[%] not in mailing list', $recieved->fromAddress ));
+      Analog::info(sprintf('Mail[%s] not in mailing list', $recieved->fromAddress ));
       continue;
     }
 
     if ($queue->has('messages', [ 'message_uid' => $recieved->messageId ])) {
       $mailbox->markMailAsRead($message_uid);
       $mailbox->moveMail($message_uid, $configuration['IMAP']['RECEIVED']);
-      Analog::info(sprintf('Mail[%] already exists', $recieved->messageId ));
+      Analog::info(sprintf('Mail[%s] already exists', $recieved->messageId ));
       continue;
     }
 
