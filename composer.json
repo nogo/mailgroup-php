@@ -10,11 +10,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php-imap/php-imap": "^2.1",
-        "swiftmailer/swiftmailer": "^6.0@dev",
-        "analog/analog": "dev-master",
-        "catfan/medoo": "dev-master",
-        "symfony/yaml": "^3.3"
+        "php-imap/php-imap": "^3.0",
+        "swiftmailer/swiftmailer": "^6.1",
+        "analog/analog": "^1.0",
+        "catfan/medoo": "^1.6",
+        "symfony/yaml": "^4.2"
     },
     "require-dev": {
         "kint-php/kint": "dev-master"
