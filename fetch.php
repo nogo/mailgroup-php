@@ -49,7 +49,6 @@ foreach (CONFIGURATION as $listName => $configuration) {
       $message_id = $queue->id();
 
       foreach ($configuration['LIST'] as $sender => $name) {
-        if ($recieved->fromAddress === $sender) continue;
         $queue->insert('queue', [
           'message_id' => $message_id,
           'send_to' => $sender
