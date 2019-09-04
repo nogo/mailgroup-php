@@ -49,6 +49,8 @@ foreach (CONFIGURATION as $listName => $configuration) {
       $message_id = $queue->id();
 
       foreach ($configuration['LIST'] as $sender => $name) {
+        if ($name === 'IGNORE') continue;
+
         $queue->insert('queue', [
           'message_id' => $message_id,
           'send_to' => $sender
